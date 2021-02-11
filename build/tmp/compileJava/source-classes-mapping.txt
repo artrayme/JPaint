@@ -1,9 +1,9 @@
-MainWindow/Panel.java
- MainWindow.Panel
-MainWindow/MenuBar.java
- MainWindow.MenuBar
 MainWindow/DrawArea.java
  MainWindow.DrawArea
+MainWindow/MenuBar.java
+ MainWindow.MenuBar
+MainWindow/Panel.java
+ MainWindow.Panel
 MainWindow/MainWindow.java
  MainWindow.MainWindow
 FirstSwingExample.java
