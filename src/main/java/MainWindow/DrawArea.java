@@ -18,7 +18,7 @@ public class DrawArea extends JPanel {
 
         Graphics2D g2d = (Graphics2D) g;
 
-        g2d.setPaint(new Color(150, 150, 150));
+        g2d.setPaint(new Color(201, 1, 1, 82));
 
         RenderingHints rh = new RenderingHints(
                 RenderingHints.KEY_ANTIALIASING,
@@ -37,6 +37,11 @@ public class DrawArea extends JPanel {
         g2d.fillArc(120, 130, 110, 100, 5, 150);
         g2d.fillOval(270, 130, 50, 50);
     }
+
+    private void drawLine(Graphics graphics) {
+
+    }
+
     @Override
     public void paintComponent(Graphics g) {
 

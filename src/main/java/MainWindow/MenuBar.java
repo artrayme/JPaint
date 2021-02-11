@@ -1,23 +1,25 @@
 package MainWindow;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class MenuBar extends JMenuBar {
-    private final JMenu fileMenu = new JMenu("File");
-    private final JMenu editMenu = new JMenu("Edit");
-    private final JMenu helpMenu = new JMenu("Help");
+    private final JMenu fileMenu = new JMenu("<html><font color='#d6d6d6'>File</font></html>");
+    private final JMenu editMenu = new JMenu("<html><font color='#d6d6d6'>Edit</font></html>");
+    private final JMenu helpMenu = new JMenu("<html><font color='#d6d6d6'>Help</font></html>");
 
-    public MenuBar(){
+    public MenuBar() {
         initFileMenu();
         initEditMenu();
         initHelpMenu();
+        setBackground(Color.DARK_GRAY);
     }
 
-    private void initFileMenu(){
-        JMenuItem save = new JMenuItem("Save");
-        JMenuItem load = new JMenuItem("Load");
-        JMenuItem close = new JMenuItem("Close");
-        JMenuItem exit = new JMenuItem("Exit");
+    private void initFileMenu() {
+        JMenuItem save = initSaveItem();
+        JMenuItem load = initLoadItem();
+        JMenuItem close = initCloseItem();
+        JMenuItem exit = initExitItem();
         fileMenu.add(save);
         fileMenu.add(load);
         fileMenu.add(close);
@@ -25,11 +27,36 @@ public class MenuBar extends JMenuBar {
         this.add(fileMenu);
     }
 
-    private void initEditMenu(){
+    private JMenuItem initSaveItem() {
+        JMenuItem save = new JMenuItem("<html><font color='#d6d6d6'>Save</font></html>");
+        save.setBackground(Color.DARK_GRAY);
+
+        return save;
+    }
+
+    private JMenuItem initLoadItem() {
+        JMenuItem load = new JMenuItem("<html><font color='#d6d6d6'>Load</font></html>");
+        load.setBackground(Color.darkGray);
+        return load;
+    }
+
+    private JMenuItem initCloseItem() {
+        JMenuItem close = new JMenuItem("<html><font color='#d6d6d6'>Close</font></html>");
+        close.setBackground(Color.darkGray);
+        return close;
+    }
+
+    private JMenuItem initExitItem() {
+        JMenuItem exit = new JMenuItem("<html><font color='#d6d6d6'>Exit</font></html>");
+        exit.setBackground(Color.darkGray);
+        return exit;
+    }
+
+    private void initEditMenu() {
         this.add(editMenu);
     }
 
-    private void initHelpMenu(){
+    private void initHelpMenu() {
         this.add(helpMenu);
 
     }
