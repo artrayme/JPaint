@@ -13,6 +13,6 @@ public class Line extends Shape {
     @Override
     public void draw(Graphics g) {
         g.setColor(this.color);
-        g.drawLine(startX, startY, endX-startX, endY-startY);
+        g.drawLine(startX, startY, endX, endY);
     }
 }
