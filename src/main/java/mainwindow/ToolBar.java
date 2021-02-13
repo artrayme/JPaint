@@ -1,42 +1,46 @@
-package MainWindow;
+package mainwindow;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 
 public class ToolBar extends JPanel {
-    public static String currentInstrument = "pencil";
     private final JButton pencil = new JButton();
     private final JButton line = new JButton();
     private final JButton rectangle = new JButton();
     private final JButton ellipse = new JButton();
     private final JButton erase = new JButton();
-    private final JButton colors = new JButton();
     private final JButton selection = new JButton();
     private final JButton lasso = new JButton();
 
-    public ToolBar(){
+    public ToolBar() {
         setBackground(Color.darkGray);
         initToolBar();
     }
+
     private void initToolBar() {
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        initAll();
+        addAll();
+    }
+
+    private void initAll() {
         initPencilButton();
         initLineButton();
         initRectangleButton();
         initEllipseButton();
         initEraseButton();
-        initColorsButton();
         initSelectionButton();
         initLassoButton();
+    }
+
+    private void addAll() {
         add(pencil);
         add(line);
         add(rectangle);
         add(ellipse);
         add(new JToolBar.Separator());
         add(erase);
-        add(new JToolBar.Separator());
-        add(colors);
         add(new JToolBar.Separator());
         add(selection);
         add(lasso);
@@ -57,43 +61,59 @@ public class ToolBar extends JPanel {
     private void initPencilButton() {
         pencil.setIcon(initButtonIcon("/icons/pencil.png"));
         pencil.setBackground(new Color(220, 220, 220));
+        pencil.addActionListener(actionEvent -> {
+            MainWindow.currentInstrument = "pencil";
+        });
     }
 
     private void initLineButton() {
         line.setIcon(initButtonIcon("/icons/line.png"));
         line.setBackground(new Color(220, 220, 220));
-
+        line.addActionListener(actionEvent -> {
+            MainWindow.currentInstrument = "line";
+        });
     }
 
     private void initEllipseButton() {
         ellipse.setIcon(initButtonIcon("/icons/ellipse.png"));
         ellipse.setBackground(new Color(220, 220, 220));
+        ellipse.addActionListener(actionEvent -> {
+            MainWindow.currentInstrument = "ellipse";
+        });
     }
 
     private void initRectangleButton() {
         rectangle.setIcon(initButtonIcon("/icons/rectangle.png"));
         rectangle.setBackground(new Color(220, 220, 220));
+        rectangle.addActionListener(actionEvent -> {
+            MainWindow.currentInstrument = "rectangle";
+        });
     }
 
     private void initEraseButton() {
         erase.setIcon(initButtonIcon("/icons/erase.png"));
         erase.setBackground(new Color(220, 220, 220));
+        erase.addActionListener(actionEvent -> {
+            MainWindow.currentInstrument = "erase";
+        });
     }
 
-    private void initColorsButton() {
-        colors.setIcon(initButtonIcon("/icons/color.png"));
-        colors.setBackground(new Color(220, 220, 220));
-    }
 
     private void initSelectionButton() {
         selection.setIcon(initButtonIcon("/icons/selection.png"));
         selection.setBackground(new Color(220, 220, 220));
+        selection.addActionListener(actionEvent -> {
+            MainWindow.currentInstrument = "selection";
+        });
     }
 
 
     private void initLassoButton() {
         lasso.setIcon(initButtonIcon("/icons/lasso.png"));
         lasso.setBackground(new Color(220, 220, 220));
+        lasso.addActionListener(actionEvent -> {
+            MainWindow.currentInstrument = "lasso";
+        });
     }
 
 }

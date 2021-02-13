@@ -1,4 +1,4 @@
-package MainWindow;
+package mainwindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,16 +16,29 @@ public class MenuBar extends JMenuBar {
     }
 
     private void initFileMenu() {
+        JMenuItem newTab = initNewTabItem();
         JMenuItem save = initSaveItem();
         JMenuItem load = initLoadItem();
         JMenuItem close = initCloseItem();
         JMenuItem exit = initExitItem();
+        fileMenu.add(newTab);
         fileMenu.add(save);
         fileMenu.add(load);
         fileMenu.add(close);
         fileMenu.add(exit);
         this.add(fileMenu);
     }
+
+
+    private JMenuItem initNewTabItem() {
+        JMenuItem newTab = new JMenuItem("<html><font color='#d6d6d6'>New</font></html>");
+        newTab.setBackground(Color.DARK_GRAY);
+        newTab.addActionListener(actionEvent -> {
+            MainWindow.tabBar.add("untiled" + MainWindow.tabsCount++, new DrawArea());
+        });
+        return newTab;
+    }
+
 
     private JMenuItem initSaveItem() {
         JMenuItem save = new JMenuItem("<html><font color='#d6d6d6'>Save</font></html>");
@@ -43,12 +56,18 @@ public class MenuBar extends JMenuBar {
     private JMenuItem initCloseItem() {
         JMenuItem close = new JMenuItem("<html><font color='#d6d6d6'>Close</font></html>");
         close.setBackground(Color.darkGray);
+        close.addActionListener(actionEvent -> {
+            MainWindow.tabBar.remove(MainWindow.tabBar.getSelectedComponent());
+        });
         return close;
     }
 
     private JMenuItem initExitItem() {
         JMenuItem exit = new JMenuItem("<html><font color='#d6d6d6'>Exit</font></html>");
         exit.setBackground(Color.darkGray);
+        exit.addActionListener(actionEvent -> {
+            System.exit(0);
+        });
         return exit;
     }
 

@@ -1,10 +1,22 @@
-MainWindow/MenuBar.java
- MainWindow.MenuBar
 Main.java
  Main
-MainWindow/MainWindow.java
- MainWindow.MainWindow
-MainWindow/ToolBar.java
- MainWindow.ToolBar
-MainWindow/DrawArea.java
- MainWindow.DrawArea
+mainwindow/ToolBar.java
+ mainwindow.ToolBar
+mainwindow/ConfigurationBar.java
+ mainwindow.ConfigurationBar
+mainwindow/shapes/Shape.java
+ mainwindow.shapes.Shape
+mainwindow/shapes/Ellipse.java
+ mainwindow.shapes.Ellipse
+mainwindow/MenuBar.java
+ mainwindow.MenuBar
+mainwindow/shapes/Line.java
+ mainwindow.shapes.Line
+mainwindow/MainWindow.java
+ mainwindow.MainWindow
+mainwindow/shapes/Rectangle.java
+ mainwindow.shapes.Rectangle
+mainwindow/DrawArea.java
+ mainwindow.DrawArea
+ mainwindow.DrawArea$1
+ mainwindow.DrawArea$2
