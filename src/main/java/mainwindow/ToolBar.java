@@ -62,7 +62,8 @@ public class ToolBar extends JPanel {
         pencil.setIcon(initButtonIcon("/icons/pencil.png"));
         pencil.setBackground(new Color(220, 220, 220));
         pencil.addActionListener(actionEvent -> {
-            MainWindow.currentInstrument = "pencil";
+            ((DrawArea)MainWindow.tabBar.getSelectedComponent()).pencil();
+//            MainWindow.currentInstrument = "pencil";
         });
     }
 
@@ -70,6 +71,7 @@ public class ToolBar extends JPanel {
         line.setIcon(initButtonIcon("/icons/line.png"));
         line.setBackground(new Color(220, 220, 220));
         line.addActionListener(actionEvent -> {
+            ((DrawArea)MainWindow.tabBar.getSelectedComponent()).line();
             MainWindow.currentInstrument = "line";
         });
     }
@@ -78,6 +80,7 @@ public class ToolBar extends JPanel {
         ellipse.setIcon(initButtonIcon("/icons/ellipse.png"));
         ellipse.setBackground(new Color(220, 220, 220));
         ellipse.addActionListener(actionEvent -> {
+            ((DrawArea)MainWindow.tabBar.getSelectedComponent()).ellipse();
             MainWindow.currentInstrument = "ellipse";
         });
     }
@@ -86,6 +89,7 @@ public class ToolBar extends JPanel {
         rectangle.setIcon(initButtonIcon("/icons/rectangle.png"));
         rectangle.setBackground(new Color(220, 220, 220));
         rectangle.addActionListener(actionEvent -> {
+            ((DrawArea)MainWindow.tabBar.getSelectedComponent()).rectangle();
             MainWindow.currentInstrument = "rectangle";
         });
     }

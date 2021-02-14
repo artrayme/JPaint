@@ -36,6 +36,25 @@ public abstract class Shape {
         this.endY = endY;
     }
 
+    public int getStartX() {
+        return startX;
+    }
+
+    public int getStartY() {
+        return startY;
+    }
+
+    public int getEndX() {
+        return endX;
+    }
+
+    public int getEndY() {
+        return endY;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
 
     public abstract void draw(Graphics g);
 

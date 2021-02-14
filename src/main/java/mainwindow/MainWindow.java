@@ -17,7 +17,7 @@ public class MainWindow extends JFrame {
     public MainWindow() {
         setLayout(new BorderLayout());
         this.setJMenuBar(menuBar);
-        tabBar.add("untiled"+tabsCount++, new DrawArea());
+        tabBar.addTab("untiled"+tabsCount++, new DrawArea());
 
         this.add(toolBar, BorderLayout.NORTH);
         this.add(configurationBar, BorderLayout.WEST);
