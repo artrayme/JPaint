@@ -12,11 +12,21 @@ import java.util.LinkedList;
 
 public class DrawArea extends JPanel {
     private MouseInputAdapter currentEvent = new PencilMouseEvent();
-    LinkedList<Shape> shapes = new LinkedList<>();
-    Shape currentShape;
-    Color currentColor = Color.BLACK;
+    private final LinkedList<Shape> shapes = new LinkedList<>();
+    private Shape currentShape;
+    private Color currentColor = Color.BLACK;
+    private int thickness = 1;
 
     public DrawArea() {
+        setBackground(Color.white);
+    }
+
+    public void setThickness(int thickness) {
+        this.thickness = thickness;
+    }
+
+    public void setCurrentColor(Color currentColor) {
+        this.currentColor = currentColor;
     }
 
     @Override
@@ -61,6 +71,30 @@ public class DrawArea extends JPanel {
         addMouseMotionListener(currentEvent);
     }
 
+    public void erase() {
+        removeMouseListener(currentEvent);
+        removeMouseMotionListener(currentEvent);
+        currentEvent = new EraseMouseEvent();
+        addMouseListener(currentEvent);
+        addMouseMotionListener(currentEvent);
+    }
+
+    public void selection() {
+        removeMouseListener(currentEvent);
+        removeMouseMotionListener(currentEvent);
+        currentEvent = new LineMouseEvent();
+        addMouseListener(currentEvent);
+        addMouseMotionListener(currentEvent);
+    }
+
+    public void lasso() {
+        removeMouseListener(currentEvent);
+        removeMouseMotionListener(currentEvent);
+        currentEvent = new LineMouseEvent();
+        addMouseListener(currentEvent);
+        addMouseMotionListener(currentEvent);
+    }
+
     class PencilMouseEvent extends MouseInputAdapter {
         private int X2;
         private int Y2;
@@ -75,6 +109,7 @@ public class DrawArea extends JPanel {
         public void mouseDragged(MouseEvent e) {
             currentShape = new Pencil();
             currentShape.setColor(currentColor);
+            currentShape.setThickness(thickness);
             shapes.add(currentShape);
             int x1 = e.getX();
             int y1 = e.getY();
@@ -95,32 +130,12 @@ public class DrawArea extends JPanel {
         @Override
         public void mousePressed(MouseEvent event) {
             currentShape = new Rectangle();
+            currentShape.setColor(currentColor);
+            currentShape.setThickness(thickness);
             currentShape.setStartX(event.getX());
             currentShape.setStartY(event.getY());
-        }
-
-        @Override
-        public void mouseDragged(MouseEvent event) {
             currentShape.setEndX(event.getX());
             currentShape.setEndY(event.getY());
-            repaint();
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent event) {
-            shapes.add(currentShape);
-            repaint();
-        }
-
-    }
-
-    class LineMouseEvent extends MouseInputAdapter {
-
-        @Override
-        public void mousePressed(MouseEvent event) {
-            currentShape = new Line();
-            currentShape.setStartX(event.getX());
-            currentShape.setStartY(event.getY());
         }
 
         @Override
@@ -143,8 +158,12 @@ public class DrawArea extends JPanel {
         @Override
         public void mousePressed(MouseEvent event) {
             currentShape = new Ellipse();
+            currentShape.setColor(currentColor);
+            currentShape.setThickness(thickness);
             currentShape.setStartX(event.getX());
             currentShape.setStartY(event.getY());
+            currentShape.setEndX(event.getX());
+            currentShape.setEndY(event.getY());
         }
 
         @Override
@@ -158,6 +177,64 @@ public class DrawArea extends JPanel {
         public void mouseReleased(MouseEvent event) {
             shapes.add(currentShape);
             repaint();
+        }
+
+    }
+
+    class LineMouseEvent extends MouseInputAdapter {
+
+        @Override
+        public void mousePressed(MouseEvent event) {
+            currentShape = new Line();
+            currentShape.setColor(currentColor);
+            currentShape.setThickness(thickness);
+            currentShape.setStartX(event.getX());
+            currentShape.setStartY(event.getY());
+            currentShape.setEndX(event.getX());
+            currentShape.setEndY(event.getY());
+        }
+
+        @Override
+        public void mouseDragged(MouseEvent event) {
+            currentShape.setEndX(event.getX());
+            currentShape.setEndY(event.getY());
+            repaint();
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent event) {
+            shapes.add(currentShape);
+            repaint();
+        }
+
+    }
+
+    class EraseMouseEvent extends MouseInputAdapter {
+        private int X2;
+        private int Y2;
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            X2 = e.getX();
+            Y2 = e.getY();
+        }
+
+        @Override
+        public void mouseDragged(MouseEvent e) {
+            currentShape = new Pencil();
+            currentShape.setThickness(thickness);
+            currentShape.setColor(Color.white);
+            shapes.add(currentShape);
+            int x1 = e.getX();
+            int y1 = e.getY();
+
+            currentShape.setStartX(X2);
+            currentShape.setStartY(Y2);
+            currentShape.setEndX(x1);
+            currentShape.setEndY(y1);
+            repaint();
+            X2 = x1;
+            Y2 = y1;
         }
 
     }

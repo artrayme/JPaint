@@ -7,6 +7,7 @@ public abstract class Shape {
     protected int startY;
     protected int endX;
     protected int endY;
+    protected int thickness;
 
     protected Color color = Color.BLACK;
 
@@ -54,6 +55,10 @@ public abstract class Shape {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public void setThickness(int thickness) {
+        this.thickness = thickness;
     }
 
     public abstract void draw(Graphics g);

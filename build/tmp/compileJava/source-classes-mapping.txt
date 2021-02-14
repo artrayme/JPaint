@@ -1,26 +1,28 @@
-mainwindow/ConfigurationBar.java
- mainwindow.ConfigurationBar
+mainwindow/shapes/Shape.java
+ mainwindow.shapes.Shape
 Main.java
  Main
 mainwindow/shapes/Pencil.java
  mainwindow.shapes.Pencil
-mainwindow/shapes/Shape.java
- mainwindow.shapes.Shape
+mainwindow/shapes/Line.java
+ mainwindow.shapes.Line
 mainwindow/shapes/Ellipse.java
  mainwindow.shapes.Ellipse
 mainwindow/shapes/Rectangle.java
  mainwindow.shapes.Rectangle
-mainwindow/shapes/Line.java
- mainwindow.shapes.Line
 mainwindow/MainWindow.java
  mainwindow.MainWindow
 mainwindow/MenuBar.java
  mainwindow.MenuBar
 mainwindow/ToolBar.java
  mainwindow.ToolBar
+mainwindow/ConfigurationBar.java
+ mainwindow.ConfigurationBar
+ mainwindow.ConfigurationBar$1
 mainwindow/DrawArea.java
  mainwindow.DrawArea
  mainwindow.DrawArea$EllipseMouseEvent
+ mainwindow.DrawArea$EraseMouseEvent
  mainwindow.DrawArea$LineMouseEvent
  mainwindow.DrawArea$PencilMouseEvent
  mainwindow.DrawArea$RectangleMouseEvent

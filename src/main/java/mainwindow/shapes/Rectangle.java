@@ -13,6 +13,7 @@ public class Rectangle extends Shape {
     @Override
     public void draw(Graphics g) {
         g.setColor(this.color);
-        g.drawRect(startX, startY, endX-startX, endY-startY);
+        ((Graphics2D) g).setStroke(new BasicStroke(thickness));
+        g.drawRect(Math.min(startX, endX), Math.min(startY, endY), Math.abs(endX-startX), Math.abs(endY-startY));
     }
 }

@@ -63,7 +63,6 @@ public class ToolBar extends JPanel {
         pencil.setBackground(new Color(220, 220, 220));
         pencil.addActionListener(actionEvent -> {
             ((DrawArea)MainWindow.tabBar.getSelectedComponent()).pencil();
-//            MainWindow.currentInstrument = "pencil";
         });
     }
 
@@ -72,7 +71,6 @@ public class ToolBar extends JPanel {
         line.setBackground(new Color(220, 220, 220));
         line.addActionListener(actionEvent -> {
             ((DrawArea)MainWindow.tabBar.getSelectedComponent()).line();
-            MainWindow.currentInstrument = "line";
         });
     }
 
@@ -81,7 +79,6 @@ public class ToolBar extends JPanel {
         ellipse.setBackground(new Color(220, 220, 220));
         ellipse.addActionListener(actionEvent -> {
             ((DrawArea)MainWindow.tabBar.getSelectedComponent()).ellipse();
-            MainWindow.currentInstrument = "ellipse";
         });
     }
 
@@ -90,7 +87,6 @@ public class ToolBar extends JPanel {
         rectangle.setBackground(new Color(220, 220, 220));
         rectangle.addActionListener(actionEvent -> {
             ((DrawArea)MainWindow.tabBar.getSelectedComponent()).rectangle();
-            MainWindow.currentInstrument = "rectangle";
         });
     }
 
@@ -98,7 +94,7 @@ public class ToolBar extends JPanel {
         erase.setIcon(initButtonIcon("/icons/erase.png"));
         erase.setBackground(new Color(220, 220, 220));
         erase.addActionListener(actionEvent -> {
-            MainWindow.currentInstrument = "erase";
+            ((DrawArea)MainWindow.tabBar.getSelectedComponent()).erase();
         });
     }
 
@@ -107,7 +103,7 @@ public class ToolBar extends JPanel {
         selection.setIcon(initButtonIcon("/icons/selection.png"));
         selection.setBackground(new Color(220, 220, 220));
         selection.addActionListener(actionEvent -> {
-            MainWindow.currentInstrument = "selection";
+            ((DrawArea)MainWindow.tabBar.getSelectedComponent()).selection();
         });
     }
 
@@ -116,7 +112,7 @@ public class ToolBar extends JPanel {
         lasso.setIcon(initButtonIcon("/icons/lasso.png"));
         lasso.setBackground(new Color(220, 220, 220));
         lasso.addActionListener(actionEvent -> {
-            MainWindow.currentInstrument = "lasso";
+            ((DrawArea)MainWindow.tabBar.getSelectedComponent()).lasso();
         });
     }
 

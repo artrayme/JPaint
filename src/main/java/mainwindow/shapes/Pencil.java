@@ -15,6 +15,7 @@ public class Pencil extends Shape{
     @Override
     public void draw(Graphics g) {
         g.setColor(color);
+        ((Graphics2D) g).setStroke(new BasicStroke(thickness));
         g.drawLine(startX, startY, endX, endY);
     }
 }
