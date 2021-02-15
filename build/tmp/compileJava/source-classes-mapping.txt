@@ -1,15 +1,19 @@
-mainwindow/shapes/Shape.java
- mainwindow.shapes.Shape
 Main.java
  Main
-mainwindow/shapes/Pencil.java
- mainwindow.shapes.Pencil
-mainwindow/shapes/Line.java
- mainwindow.shapes.Line
 mainwindow/shapes/Ellipse.java
  mainwindow.shapes.Ellipse
+mainwindow/shapes/Picture.java
+ mainwindow.shapes.Picture
+mainwindow/shapes/Shape.java
+ mainwindow.shapes.Shape
+mainwindow/shapes/SelectionRectangle.java
+ mainwindow.shapes.SelectionRectangle
+mainwindow/shapes/Pencil.java
+ mainwindow.shapes.Pencil
 mainwindow/shapes/Rectangle.java
  mainwindow.shapes.Rectangle
+mainwindow/shapes/Line.java
+ mainwindow.shapes.Line
 mainwindow/MainWindow.java
  mainwindow.MainWindow
 mainwindow/MenuBar.java
@@ -21,8 +25,14 @@ mainwindow/ConfigurationBar.java
  mainwindow.ConfigurationBar$1
 mainwindow/DrawArea.java
  mainwindow.DrawArea
+ mainwindow.DrawArea$1
+ mainwindow.DrawArea$1$1
+ mainwindow.DrawArea$CopyKeyEvent
  mainwindow.DrawArea$EllipseMouseEvent
  mainwindow.DrawArea$EraseMouseEvent
  mainwindow.DrawArea$LineMouseEvent
+ mainwindow.DrawArea$PasteKeyEvent
  mainwindow.DrawArea$PencilMouseEvent
+ mainwindow.DrawArea$PictureMouseEvent
  mainwindow.DrawArea$RectangleMouseEvent
+ mainwindow.DrawArea$SelectionMouseEvent

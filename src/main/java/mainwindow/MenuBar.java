@@ -50,6 +50,9 @@ public class MenuBar extends JMenuBar {
     private JMenuItem initLoadItem() {
         JMenuItem load = new JMenuItem("<html><font color='#d6d6d6'>Load</font></html>");
         load.setBackground(Color.darkGray);
+        load.addActionListener(actionEvent -> {
+            ((DrawArea) MainWindow.tabBar.getSelectedComponent()).loadPicture();
+        });
         return load;
     }
 
