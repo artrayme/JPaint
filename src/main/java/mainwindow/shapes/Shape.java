@@ -10,8 +10,10 @@ public abstract class Shape {
     protected int thickness;
 
     protected Color color = Color.BLACK;
+    protected String text = "";
 
-    Shape (){}
+    Shape() {
+    }
 
     Shape(int startX, int startY, int endX, int endY, Color color) {
         this.startX = startX;
@@ -51,6 +53,14 @@ public abstract class Shape {
 
     public int getEndY() {
         return endY;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public void setColor(Color color) {

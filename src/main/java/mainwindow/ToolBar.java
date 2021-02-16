@@ -9,9 +9,11 @@ public class ToolBar extends JPanel {
     private final JButton line = new JButton();
     private final JButton rectangle = new JButton();
     private final JButton ellipse = new JButton();
+    private final JButton text = new JButton();
     private final JButton erase = new JButton();
     private final JButton selection = new JButton();
     private final JButton lasso = new JButton();
+    private final JButton zoom = new JButton();
 
     public ToolBar() {
         setBackground(Color.darkGray);
@@ -29,9 +31,11 @@ public class ToolBar extends JPanel {
         initLineButton();
         initRectangleButton();
         initEllipseButton();
+        initTextButton();
         initEraseButton();
         initSelectionButton();
         initLassoButton();
+        initZoomButton();
     }
 
     private void addAll() {
@@ -39,11 +43,14 @@ public class ToolBar extends JPanel {
         add(line);
         add(rectangle);
         add(ellipse);
+        add(text);
         add(new JToolBar.Separator());
         add(erase);
         add(new JToolBar.Separator());
         add(selection);
         add(lasso);
+        add(new JToolBar.Separator());
+        add(zoom);
     }
 
     private ImageIcon initButtonIcon(String path) {
@@ -90,6 +97,14 @@ public class ToolBar extends JPanel {
         });
     }
 
+    private void initTextButton() {
+        text.setIcon(initButtonIcon("/icons/text.png"));
+        text.setBackground(new Color(220, 220, 220));
+        text.addActionListener(actionEvent -> {
+            ((DrawArea)MainWindow.tabBar.getSelectedComponent()).text();
+        });
+    }
+
     private void initEraseButton() {
         erase.setIcon(initButtonIcon("/icons/erase.png"));
         erase.setBackground(new Color(220, 220, 220));
@@ -113,6 +128,14 @@ public class ToolBar extends JPanel {
         lasso.setBackground(new Color(220, 220, 220));
         lasso.addActionListener(actionEvent -> {
             ((DrawArea)MainWindow.tabBar.getSelectedComponent()).lasso();
+        });
+    }
+
+    private void initZoomButton() {
+        zoom.setIcon(initButtonIcon("/icons/zoom.png"));
+        zoom.setBackground(new Color(220, 220, 220));
+        zoom.addActionListener(actionEvent -> {
+            ((DrawArea)MainWindow.tabBar.getSelectedComponent()).zoom();
         });
     }
 

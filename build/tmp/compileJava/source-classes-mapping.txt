@@ -1,15 +1,21 @@
+mainwindow/AboutWindow.java
+ mainwindow.AboutWindow
+mainwindow/shapes/SelectionRectangle.java
+ mainwindow.shapes.SelectionRectangle
 Main.java
  Main
+mainwindow/shapes/Background.java
+ mainwindow.shapes.Background
+mainwindow/shapes/Shape.java
+ mainwindow.shapes.Shape
+mainwindow/shapes/Pencil.java
+ mainwindow.shapes.Pencil
 mainwindow/shapes/Ellipse.java
  mainwindow.shapes.Ellipse
 mainwindow/shapes/Picture.java
  mainwindow.shapes.Picture
-mainwindow/shapes/Shape.java
- mainwindow.shapes.Shape
-mainwindow/shapes/SelectionRectangle.java
- mainwindow.shapes.SelectionRectangle
-mainwindow/shapes/Pencil.java
- mainwindow.shapes.Pencil
+mainwindow/shapes/Text.java
+ mainwindow.shapes.Text
 mainwindow/shapes/Rectangle.java
  mainwindow.shapes.Rectangle
 mainwindow/shapes/Line.java
@@ -23,16 +29,21 @@ mainwindow/ToolBar.java
 mainwindow/ConfigurationBar.java
  mainwindow.ConfigurationBar
  mainwindow.ConfigurationBar$1
+ mainwindow.ConfigurationBar$ThicknessFieldListener
+ mainwindow.ConfigurationBar$ZoomFieldListener
 mainwindow/DrawArea.java
  mainwindow.DrawArea
  mainwindow.DrawArea$1
- mainwindow.DrawArea$1$1
  mainwindow.DrawArea$CopyKeyEvent
  mainwindow.DrawArea$EllipseMouseEvent
  mainwindow.DrawArea$EraseMouseEvent
+ mainwindow.DrawArea$LassoMouseEvent
  mainwindow.DrawArea$LineMouseEvent
  mainwindow.DrawArea$PasteKeyEvent
  mainwindow.DrawArea$PencilMouseEvent
  mainwindow.DrawArea$PictureMouseEvent
  mainwindow.DrawArea$RectangleMouseEvent
  mainwindow.DrawArea$SelectionMouseEvent
+ mainwindow.DrawArea$TextFieldDocumentListener
+ mainwindow.DrawArea$TextFieldKeyListener
+ mainwindow.DrawArea$TextMouseEvent

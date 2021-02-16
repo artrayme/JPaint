@@ -10,8 +10,11 @@ public class ConfigurationBar extends JPanel {
 
     private final JButton colors = new JButton();
 
-    private final JTextField thicknessFiled = new JTextField();
+    private final JTextField thicknessField = new JTextField();
     private final JLabel thicknessLabel = new JLabel("<html><font color='#d6d6d6'>Thickness:</font></html>");
+
+    private final JTextField zoomField = new JTextField();
+    private final JLabel zoomLabel = new JLabel("<html><font color='#d6d6d6'>Zoom:</font></html>");
 
     public ConfigurationBar() {
         setBackground(Color.darkGray);
@@ -25,14 +28,16 @@ public class ConfigurationBar extends JPanel {
 
         initColorsButton();
         initThicknessField();
+        initZoomField();
 
         add(new JToolBar.Separator());
         add(colors);
         add(new JToolBar.Separator());
         add(thicknessLabel);
-        add(thicknessFiled);
+        add(thicknessField);
         add(new JToolBar.Separator());
-
+        add(zoomLabel);
+        add(zoomField);
     }
 
     private ImageIcon initButtonIcon(String path) {
@@ -58,37 +63,75 @@ public class ConfigurationBar extends JPanel {
     }
 
     private void initThicknessField() {
-        thicknessFiled.setText("1");
-        thicknessFiled.setMaximumSize(new Dimension(110, 32));
-        thicknessFiled.setAlignmentX(1);
+        thicknessField.setText("1");
+        thicknessField.setMaximumSize(new Dimension(110, 32));
+        thicknessField.setAlignmentX(1);
         thicknessLabel.setAlignmentX(1);
-        thicknessFiled.getDocument().addDocumentListener(new DocumentListener() {
+        thicknessField.getDocument().addDocumentListener(new ThicknessFieldListener());
+    }
 
-            @Override
-            public void insertUpdate(DocumentEvent documentEvent) {
-                setThickness();
-            }
+    private void initZoomField() {
+        zoomField.setText("1");
+        zoomField.setMaximumSize(new Dimension(110, 32));
+        zoomField.setAlignmentX(1);
+        zoomLabel.setAlignmentX(1);
+        zoomField.getDocument().addDocumentListener(new ZoomFieldListener());
+    }
 
-            @Override
-            public void removeUpdate(DocumentEvent documentEvent) {
-                setThickness();
-            }
+    private class ThicknessFieldListener implements DocumentListener {
+        @Override
+        public void insertUpdate(DocumentEvent documentEvent) {
+            setThickness();
+        }
 
-            @Override
-            public void changedUpdate(DocumentEvent documentEvent) {
-                setThickness();
-            }
+        @Override
+        public void removeUpdate(DocumentEvent documentEvent) {
+            setThickness();
+        }
 
-            private void setThickness() {
-                int result = 1;
-                try {
-                    result = Integer.parseInt(thicknessFiled.getText());
-                } catch (NumberFormatException e) {
-                    thicknessFiled.setBackground(Color.red);
-                }
-                thicknessFiled.setBackground(Color.white);
-                ((DrawArea) MainWindow.tabBar.getSelectedComponent()).setThickness(result);
+        @Override
+        public void changedUpdate(DocumentEvent documentEvent) {
+            setThickness();
+        }
+
+        private void setThickness() {
+            int result = 1;
+            try {
+                result = Integer.parseInt(thicknessField.getText());
+                thicknessField.setBackground(Color.white);
+            } catch (NumberFormatException e) {
+                thicknessField.setBackground(Color.red);
             }
-        });
+            ((DrawArea) MainWindow.tabBar.getSelectedComponent()).setThickness(result);
+        }
+    }
+
+    private class ZoomFieldListener implements DocumentListener {
+        @Override
+        public void insertUpdate(DocumentEvent documentEvent) {
+            setZoom();
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent documentEvent) {
+            setZoom();
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent documentEvent) {
+            setZoom();
+        }
+
+        private void setZoom() {
+            int result = 1;
+            try {
+                result = Integer.parseInt(thicknessField.getText());
+                zoomField.setBackground(Color.white);
+            } catch (NumberFormatException e) {
+                zoomField.setBackground(Color.red);
+            }
+            ((DrawArea) MainWindow.tabBar.getSelectedComponent()).setZoom(result);
+
+        }
     }
 }

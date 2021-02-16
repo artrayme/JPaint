@@ -2,6 +2,7 @@ package mainwindow;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class MenuBar extends JMenuBar {
     private final JMenu fileMenu = new JMenu("<html><font color='#d6d6d6'>File</font></html>");
@@ -29,7 +30,6 @@ public class MenuBar extends JMenuBar {
         this.add(fileMenu);
     }
 
-
     private JMenuItem initNewTabItem() {
         JMenuItem newTab = new JMenuItem("<html><font color='#d6d6d6'>New</font></html>");
         newTab.setBackground(Color.DARK_GRAY);
@@ -43,7 +43,15 @@ public class MenuBar extends JMenuBar {
     private JMenuItem initSaveItem() {
         JMenuItem save = new JMenuItem("<html><font color='#d6d6d6'>Save</font></html>");
         save.setBackground(Color.DARK_GRAY);
-
+        save.addActionListener(actionEvent -> {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+            int result = fileChooser.showOpenDialog(this);
+            if (result == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                ((DrawArea) MainWindow.tabBar.getSelectedComponent()).savePicture(selectedFile);
+            }
+        });
         return save;
     }
 
@@ -51,7 +59,13 @@ public class MenuBar extends JMenuBar {
         JMenuItem load = new JMenuItem("<html><font color='#d6d6d6'>Load</font></html>");
         load.setBackground(Color.darkGray);
         load.addActionListener(actionEvent -> {
-            ((DrawArea) MainWindow.tabBar.getSelectedComponent()).loadPicture();
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+            int result = fileChooser.showOpenDialog(this);
+            if (result == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                ((DrawArea) MainWindow.tabBar.getSelectedComponent()).loadPicture(selectedFile);
+            }
         });
         return load;
     }
@@ -75,12 +89,112 @@ public class MenuBar extends JMenuBar {
     }
 
     private void initEditMenu() {
+        JMenuItem pencil = initPencilInstrumentItem();
+        JMenuItem line = initLineInstrumentItem();
+        JMenuItem rectangle = initRectangleInstrumentItem();
+        JMenuItem ellipse = initEllipseInstrumentItem();
+        JMenuItem text = initTextInstrumentItem();
+        JMenuItem selectionRectangle = initSelectionRectangleInstrumentItem();
+        JMenuItem lasso = initLassoInstrumentItem();
+        JMenuItem zoom = initZoomInstrumentItem();
+        editMenu.add(pencil);
+        editMenu.add(line);
+        editMenu.add(rectangle);
+        editMenu.add(ellipse);
+        editMenu.add(text);
+        editMenu.add(selectionRectangle);
+        editMenu.add(lasso);
+        editMenu.add(zoom);
         this.add(editMenu);
     }
 
-    private void initHelpMenu() {
-        this.add(helpMenu);
+    private JMenuItem initPencilInstrumentItem() {
+        JMenuItem pencil = new JMenuItem("<html><font color='#d6d6d6'>Pencil</font></html>");
+        pencil.setBackground(Color.DARK_GRAY);
+        pencil.addActionListener(actionEvent -> {
+            ((DrawArea) MainWindow.tabBar.getSelectedComponent()).pencil();
+        });
+        return pencil;
+    }
 
+
+    private JMenuItem initLineInstrumentItem() {
+        JMenuItem line = new JMenuItem("<html><font color='#d6d6d6'>Line</font></html>");
+        line.setBackground(Color.DARK_GRAY);
+        line.addActionListener(actionEvent -> {
+            ((DrawArea) MainWindow.tabBar.getSelectedComponent()).line();
+        });
+        return line;
+    }
+
+    private JMenuItem initRectangleInstrumentItem() {
+        JMenuItem rectangle = new JMenuItem("<html><font color='#d6d6d6'>Rectangle</font></html>");
+        rectangle.setBackground(Color.darkGray);
+        rectangle.addActionListener(actionEvent -> {
+            ((DrawArea) MainWindow.tabBar.getSelectedComponent()).rectangle();
+        });
+        return rectangle;
+    }
+
+    private JMenuItem initEllipseInstrumentItem() {
+        JMenuItem ellipse = new JMenuItem("<html><font color='#d6d6d6'>Ellipse</font></html>");
+        ellipse.setBackground(Color.darkGray);
+        ellipse.addActionListener(actionEvent -> {
+            ((DrawArea) MainWindow.tabBar.getSelectedComponent()).ellipse();
+        });
+        return ellipse;
+    }
+
+    private JMenuItem initTextInstrumentItem() {
+        JMenuItem text = new JMenuItem("<html><font color='#d6d6d6'>Text</font></html>");
+        text.setBackground(Color.darkGray);
+        text.addActionListener(actionEvent -> {
+            ((DrawArea) MainWindow.tabBar.getSelectedComponent()).text();
+        });
+        return text;
+    }
+
+    private JMenuItem initSelectionRectangleInstrumentItem() {
+        JMenuItem selectionRectangle = new JMenuItem("<html><font color='#d6d6d6'>Select</font></html>");
+        selectionRectangle.setBackground(Color.darkGray);
+        selectionRectangle.addActionListener(actionEvent -> {
+            ((DrawArea) MainWindow.tabBar.getSelectedComponent()).selection();
+        });
+        return selectionRectangle;
+    }
+
+    private JMenuItem initLassoInstrumentItem() {
+        JMenuItem lasso = new JMenuItem("<html><font color='#d6d6d6'>Lasso</font></html>");
+        lasso.setBackground(Color.darkGray);
+        lasso.addActionListener(actionEvent -> {
+            ((DrawArea) MainWindow.tabBar.getSelectedComponent()).lasso();
+        });
+        return lasso;
+    }
+
+    private JMenuItem initZoomInstrumentItem() {
+        JMenuItem zoom = new JMenuItem("<html><font color='#d6d6d6'>Zoom</font></html>");
+        zoom.setBackground(Color.darkGray);
+        zoom.addActionListener(actionEvent -> {
+            ((DrawArea) MainWindow.tabBar.getSelectedComponent()).zoom();
+        });
+        return zoom;
+    }
+
+    private void initHelpMenu() {
+        JMenuItem about = initAboutItem();
+        helpMenu.add(about);
+        this.add(helpMenu);
+    }
+
+    private JMenuItem initAboutItem() {
+        JMenuItem zoom = new JMenuItem("<html><font color='#d6d6d6'>about</font></html>");
+        zoom.setBackground(Color.darkGray);
+        zoom.addActionListener(actionEvent -> {
+            new AboutWindow(this.getX(), this.getY());
+            ((DrawArea) MainWindow.tabBar.getSelectedComponent()).zoom();
+        });
+        return zoom;
     }
 
 }

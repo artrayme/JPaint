@@ -12,10 +12,9 @@ public class MainWindow extends JFrame {
     public static int tabsCount = 0;
 
     public MainWindow() {
-
         setLayout(new BorderLayout());
         this.setJMenuBar(menuBar);
-        tabBar.addTab("untiled"+tabsCount++, new DrawArea());
+        tabBar.addTab("tab"+tabsCount++, new DrawArea());
 
         this.add(toolBar, BorderLayout.NORTH);
         this.add(configurationBar, BorderLayout.WEST);

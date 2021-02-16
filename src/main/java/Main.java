@@ -18,7 +18,6 @@ public class Main {
 
         System.setProperty("awt.useSystemAAFontSettings", "on");
         System.setProperty("swing.aatext", "true");
-        System.out.println(UIManager.getCrossPlatformLookAndFeelClassName());
         setUIFont(new FontUIResource("Liberation Serif", Font.BOLD, 14));
 
         MainWindow mainWindow = new MainWindow();
@@ -27,12 +26,12 @@ public class Main {
         mainWindow.setVisible(true);
     }
 
-    public static void setUIFont(javax.swing.plaf.FontUIResource f) {
+    public static void setUIFont(FontUIResource f) {
         Enumeration keys = UIManager.getDefaults().keys();
         while (keys.hasMoreElements()) {
             Object key = keys.nextElement();
             Object value = UIManager.get(key);
-            if (value instanceof javax.swing.plaf.FontUIResource)
+            if (value instanceof FontUIResource)
                 UIManager.put(key, f);
         }
     }
