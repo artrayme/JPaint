@@ -125,7 +125,7 @@ public class ConfigurationBar extends JPanel {
         private void setZoom() {
             int result = 1;
             try {
-                result = Integer.parseInt(thicknessField.getText());
+                result = Integer.parseInt(zoomField.getText());
                 zoomField.setBackground(Color.white);
             } catch (NumberFormatException e) {
                 zoomField.setBackground(Color.red);

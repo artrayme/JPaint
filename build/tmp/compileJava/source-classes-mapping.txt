@@ -20,17 +20,6 @@ mainwindow/shapes/Rectangle.java
  mainwindow.shapes.Rectangle
 mainwindow/shapes/Line.java
  mainwindow.shapes.Line
-mainwindow/MainWindow.java
- mainwindow.MainWindow
-mainwindow/MenuBar.java
- mainwindow.MenuBar
-mainwindow/ToolBar.java
- mainwindow.ToolBar
-mainwindow/ConfigurationBar.java
- mainwindow.ConfigurationBar
- mainwindow.ConfigurationBar$1
- mainwindow.ConfigurationBar$ThicknessFieldListener
- mainwindow.ConfigurationBar$ZoomFieldListener
 mainwindow/DrawArea.java
  mainwindow.DrawArea
  mainwindow.DrawArea$1
@@ -47,3 +36,15 @@ mainwindow/DrawArea.java
  mainwindow.DrawArea$TextFieldDocumentListener
  mainwindow.DrawArea$TextFieldKeyListener
  mainwindow.DrawArea$TextMouseEvent
+ mainwindow.DrawArea$ZoomMouseEvent
+mainwindow/MenuBar.java
+ mainwindow.MenuBar
+mainwindow/ToolBar.java
+ mainwindow.ToolBar
+mainwindow/MainWindow.java
+ mainwindow.MainWindow
+mainwindow/ConfigurationBar.java
+ mainwindow.ConfigurationBar
+ mainwindow.ConfigurationBar$1
+ mainwindow.ConfigurationBar$ThicknessFieldListener
+ mainwindow.ConfigurationBar$ZoomFieldListener

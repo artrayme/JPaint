@@ -201,14 +201,16 @@ public class DrawArea extends JPanel {
     }
 
     public void zoom() {
+        remove(textField);
         removeMouseListener(currentEvent);
         removeMouseMotionListener(currentEvent);
-        currentEvent = new PictureMouseEvent();
+        currentEvent = new ZoomMouseEvent();
         addMouseListener(currentEvent);
         addMouseMotionListener(currentEvent);
+        setCursor(new Cursor(Cursor.MOVE_CURSOR));
+        croppedImage = copyImage(((BufferedImage) image).getSubimage(0, 0, 100/zoom, 100/zoom));
+        croppedImage = croppedImage.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
         currentShape = new Picture(croppedImage);
-        Cursor cursor = new Cursor(Cursor.DEFAULT_CURSOR);
-        setCursor(cursor);
     }
 
     public void loadPicture(File file) {
@@ -561,9 +563,18 @@ public class DrawArea extends JPanel {
             repaint();
         }
 
+    }
+
+    private class ZoomMouseEvent extends MouseInputAdapter {
+
         @Override
-        public void mouseReleased(MouseEvent event) {
-//            picture();
+        public void mouseMoved(MouseEvent event) {
+            croppedImage = copyImage(((BufferedImage) image).getSubimage(event.getX(), event.getY(), 100/zoom, 100/zoom));
+            croppedImage = croppedImage.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+            currentShape = new Picture(croppedImage);
+            currentShape.setStartX(event.getX());
+            currentShape.setStartY(event.getY());
+            repaint();
         }
 
     }
