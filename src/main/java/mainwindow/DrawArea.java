@@ -19,21 +19,38 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 public class DrawArea extends JPanel {
+    //This map is using for adding shortcuts (only copy-paste now)
     private final HashMap<KeyStroke, Action> actionMap = new HashMap<>();
+
+    //This MouseInputAdapter set behavior for each figure when draw
     private MouseInputAdapter currentEvent = new PencilMouseEvent();
+
+    //Current list of shapes. All shapes from this list are repaints each cycle
     private final LinkedList<Shape> shapes = new LinkedList<>();
 
+    //Current active shape. It's redraws too, and using for the figure animation
     private Shape currentShape = new Pencil();
+
     private Color currentColor = Color.BLACK;
     private int thickness = 1;
     private int zoom = 1;
+
+    //This flag is using for deleting old selection rectangle
     private boolean isSelection = false;
 
+    //Dimensions for a selection rectangle
     private int selectedAreaStartX, selectedAreaStartY, selectedAreaEndX, selectedAreaEndY;
+
+    //Image of current drawing area state
     private Image image;
+
+    //This image is using for copy-paste and zoom functions
     private Image croppedImage;
+
+    //This is a duplicate of the drawing area
     private Graphics2D graphics;
 
+    //This field is appear, when text function is activated
     private final JTextField textField = new JTextField();
 
     public DrawArea() {
