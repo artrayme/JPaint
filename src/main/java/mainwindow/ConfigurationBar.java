@@ -102,7 +102,10 @@ public class ConfigurationBar extends JPanel {
             } catch (NumberFormatException e) {
                 thicknessField.setBackground(Color.red);
             }
-            ((DrawArea) MainWindow.tabBar.getSelectedComponent()).setThickness(result);
+            if (result > 0 && result < 200)
+                ((DrawArea) MainWindow.tabBar.getSelectedComponent()).setThickness(result);
+            else
+                thicknessField.setBackground(Color.red);
         }
     }
 
@@ -130,7 +133,10 @@ public class ConfigurationBar extends JPanel {
             } catch (NumberFormatException e) {
                 zoomField.setBackground(Color.red);
             }
-            ((DrawArea) MainWindow.tabBar.getSelectedComponent()).setZoom(result);
+            if (result > 0 && result < 10)
+                ((DrawArea) MainWindow.tabBar.getSelectedComponent()).setZoom(result);
+            else
+                zoomField.setBackground(Color.red);
 
         }
     }

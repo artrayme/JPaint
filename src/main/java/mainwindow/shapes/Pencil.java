@@ -8,8 +8,13 @@ public class Pencil extends Shape{
 
     }
 
-    public Pencil (Color color){
+    public Pencil(int startX, int startY, int endX, int endY, Color color, int thickness){
+        this.startX = startX;
+        this.startY = startY;
+        this.endX = endX;
+        this.endY = endY;
         this.color = color;
+        this.thickness = thickness;
     }
 
     @Override

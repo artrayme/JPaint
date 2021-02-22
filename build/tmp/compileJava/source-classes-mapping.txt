@@ -10,16 +10,16 @@ mainwindow/shapes/Shape.java
  mainwindow.shapes.Shape
 mainwindow/shapes/Pencil.java
  mainwindow.shapes.Pencil
-mainwindow/shapes/Ellipse.java
- mainwindow.shapes.Ellipse
-mainwindow/shapes/Picture.java
- mainwindow.shapes.Picture
-mainwindow/shapes/Text.java
- mainwindow.shapes.Text
 mainwindow/shapes/Rectangle.java
  mainwindow.shapes.Rectangle
+mainwindow/shapes/Picture.java
+ mainwindow.shapes.Picture
 mainwindow/shapes/Line.java
  mainwindow.shapes.Line
+mainwindow/shapes/Ellipse.java
+ mainwindow.shapes.Ellipse
+mainwindow/shapes/Text.java
+ mainwindow.shapes.Text
 mainwindow/MainWindow.java
  mainwindow.MainWindow
 mainwindow/MenuBar.java

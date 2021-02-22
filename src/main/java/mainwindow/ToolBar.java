@@ -15,6 +15,8 @@ public class ToolBar extends JPanel {
     private final JButton lasso = new JButton();
     private final JButton zoom = new JButton();
 
+    private JButton lastClicked = pencil;
+
     public ToolBar() {
         setBackground(Color.darkGray);
         initToolBar();
@@ -70,6 +72,9 @@ public class ToolBar extends JPanel {
         pencil.setBackground(new Color(220, 220, 220));
         pencil.addActionListener(actionEvent -> {
             ((DrawArea)MainWindow.tabBar.getSelectedComponent()).pencil();
+            lastClicked.setBackground(new Color(220, 220, 220));
+            lastClicked = pencil;
+            pencil.setBackground(new Color(118, 246, 74));
         });
     }
 
@@ -78,6 +83,9 @@ public class ToolBar extends JPanel {
         line.setBackground(new Color(220, 220, 220));
         line.addActionListener(actionEvent -> {
             ((DrawArea)MainWindow.tabBar.getSelectedComponent()).line();
+            lastClicked.setBackground(new Color(220, 220, 220));
+            lastClicked = line;
+            line.setBackground(new Color(118, 246, 74));
         });
     }
 
@@ -86,6 +94,9 @@ public class ToolBar extends JPanel {
         ellipse.setBackground(new Color(220, 220, 220));
         ellipse.addActionListener(actionEvent -> {
             ((DrawArea)MainWindow.tabBar.getSelectedComponent()).ellipse();
+            lastClicked.setBackground(new Color(220, 220, 220));
+            lastClicked = ellipse;
+            ellipse.setBackground(new Color(118, 246, 74));
         });
     }
 
@@ -94,6 +105,9 @@ public class ToolBar extends JPanel {
         rectangle.setBackground(new Color(220, 220, 220));
         rectangle.addActionListener(actionEvent -> {
             ((DrawArea)MainWindow.tabBar.getSelectedComponent()).rectangle();
+            lastClicked.setBackground(new Color(220, 220, 220));
+            lastClicked = rectangle;
+            rectangle.setBackground(new Color(118, 246, 74));
         });
     }
 
@@ -102,6 +116,9 @@ public class ToolBar extends JPanel {
         text.setBackground(new Color(220, 220, 220));
         text.addActionListener(actionEvent -> {
             ((DrawArea)MainWindow.tabBar.getSelectedComponent()).text();
+            lastClicked.setBackground(new Color(220, 220, 220));
+            lastClicked = text;
+            text.setBackground(new Color(118, 246, 74));
         });
     }
 
@@ -110,24 +127,31 @@ public class ToolBar extends JPanel {
         erase.setBackground(new Color(220, 220, 220));
         erase.addActionListener(actionEvent -> {
             ((DrawArea)MainWindow.tabBar.getSelectedComponent()).erase();
+            lastClicked.setBackground(new Color(220, 220, 220));
+            lastClicked = erase;
+            erase.setBackground(new Color(118, 246, 74));
         });
     }
-
 
     private void initSelectionButton() {
         selection.setIcon(initButtonIcon("/icons/selection.png"));
         selection.setBackground(new Color(220, 220, 220));
         selection.addActionListener(actionEvent -> {
             ((DrawArea)MainWindow.tabBar.getSelectedComponent()).selection();
+            lastClicked.setBackground(new Color(220, 220, 220));
+            lastClicked = selection;
+            selection.setBackground(new Color(118, 246, 74));
         });
     }
-
 
     private void initLassoButton() {
         lasso.setIcon(initButtonIcon("/icons/lasso.png"));
         lasso.setBackground(new Color(220, 220, 220));
         lasso.addActionListener(actionEvent -> {
             ((DrawArea)MainWindow.tabBar.getSelectedComponent()).lasso();
+            lastClicked.setBackground(new Color(220, 220, 220));
+            lastClicked = lasso;
+            lasso.setBackground(new Color(118, 246, 74));
         });
     }
 
@@ -136,6 +160,9 @@ public class ToolBar extends JPanel {
         zoom.setBackground(new Color(220, 220, 220));
         zoom.addActionListener(actionEvent -> {
             ((DrawArea)MainWindow.tabBar.getSelectedComponent()).zoom();
+            lastClicked.setBackground(new Color(220, 220, 220));
+            lastClicked = zoom;
+            zoom.setBackground(new Color(118, 246, 74));
         });
     }
 

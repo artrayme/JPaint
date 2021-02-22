@@ -21,7 +21,7 @@ public class Main {
         setUIFont(new FontUIResource("Liberation Serif", Font.BOLD, 14));
 
         MainWindow mainWindow = new MainWindow();
-        mainWindow.setTitle("JPaint - 1.1 beta");
+        mainWindow.setTitle("JPaint - 1.2 beta");
         mainWindow.setBounds((screenSize.width - width) / 2, (screenSize.height - height) / 2, width, height);
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainWindow.setVisible(true);
