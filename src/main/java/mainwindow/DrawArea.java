@@ -10,17 +10,17 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.awt.font.FontRenderContext;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 public class DrawArea extends JPanel {
     //This map is using for adding shortcuts (only copy-paste now)
@@ -30,11 +30,11 @@ public class DrawArea extends JPanel {
     private MouseInputAdapter currentEvent = new PencilMouseEvent();
 
     //Current list of shapes. All shapes from this list are repaints each cycle
-    private final LinkedList<Shape> shapes = new LinkedList<>();
+    private final List<Shape> shapes = new LinkedList<>();
 
     //This shape is consist of temporary objects, such as selection frame.
     // Shapes in this list are display, but not saved to image
-    private final LinkedList<Shape> tempShapes = new LinkedList<>();
+    private final List<Shape> tempShapes = new LinkedList<>();
 
     //Current active shape. It's redraws too, and using for the figure animation
     private Shape currentShape = new Pencil();
@@ -58,9 +58,31 @@ public class DrawArea extends JPanel {
     //This field is appear, when text function is activated
     private final JTextField textField = new JTextField();
 
-    public DrawArea() {
+    AffineTransform fieldScale = new AffineTransform();
+
+    public DrawArea(int x, int y) {
+        setPreferredSize(new Dimension(x, y));
         setupShortcuts();
         pencil();
+        this.addMouseWheelListener(new MouseAdapter() {
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                double scale = 1;
+                if (e.getPreciseWheelRotation() < 0) {
+                    scale -= 0.1;
+                } else {
+                    scale += 0.1;
+                }
+                if (scale < 0.01) {
+                    scale = 0.01;
+                }
+                double anchorX = (getWidth() - getWidth() * scale) / 2;
+                double anchorY = (getHeight() - getHeight() * scale) / 2;
+                fieldScale.translate(anchorX, anchorY);
+                fieldScale.scale(scale, scale);
+                repaint();
+            }
+        });
     }
 
     private void setupShortcuts() {
@@ -101,6 +123,8 @@ public class DrawArea extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        ((Graphics2D) g).setTransform(fieldScale);
+
         g.setColor(Color.white);
         g.fillRect(0, 0, getWidth(), getHeight());
         getScreenImage();
@@ -112,6 +136,8 @@ public class DrawArea extends JPanel {
             tempShape.draw(g);
         }
         currentShape.draw(g);
+        ((Graphics2D) g).setTransform(fieldScale);
+
     }
 
     private void getScreenImage() {
@@ -281,11 +307,6 @@ public class DrawArea extends JPanel {
             Y2 = y1;
         }
 
-        @Override
-        public void mouseReleased(MouseEvent e) {
-            cacheField();
-        }
-
     }
 
     private class LineMouseEvent extends MouseInputAdapter {
@@ -404,6 +425,7 @@ public class DrawArea extends JPanel {
 
         @Override
         public void mousePressed(MouseEvent e) {
+            cacheField();
             X2 = e.getX();
             Y2 = e.getY();
         }
@@ -417,11 +439,6 @@ public class DrawArea extends JPanel {
             repaint();
             X2 = x1;
             Y2 = y1;
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-            cacheField();
         }
 
     }

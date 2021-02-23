@@ -71,7 +71,7 @@ public class ToolBar extends JPanel {
         pencil.setIcon(initButtonIcon("/icons/pencil.png"));
         pencil.setBackground(new Color(220, 220, 220));
         pencil.addActionListener(actionEvent -> {
-            ((DrawArea)MainWindow.tabBar.getSelectedComponent()).pencil();
+            (((DrawArea)((JScrollPane)MainWindow.tabBar.getSelectedComponent()).getViewport().getView())).pencil();
             lastClicked.setBackground(new Color(220, 220, 220));
             lastClicked = pencil;
             pencil.setBackground(new Color(118, 246, 74));
@@ -82,7 +82,7 @@ public class ToolBar extends JPanel {
         line.setIcon(initButtonIcon("/icons/line.png"));
         line.setBackground(new Color(220, 220, 220));
         line.addActionListener(actionEvent -> {
-            ((DrawArea)MainWindow.tabBar.getSelectedComponent()).line();
+            (((DrawArea)((JScrollPane)MainWindow.tabBar.getSelectedComponent()).getViewport().getView())).line();
             lastClicked.setBackground(new Color(220, 220, 220));
             lastClicked = line;
             line.setBackground(new Color(118, 246, 74));
@@ -93,7 +93,7 @@ public class ToolBar extends JPanel {
         ellipse.setIcon(initButtonIcon("/icons/ellipse.png"));
         ellipse.setBackground(new Color(220, 220, 220));
         ellipse.addActionListener(actionEvent -> {
-            ((DrawArea)MainWindow.tabBar.getSelectedComponent()).ellipse();
+            (((DrawArea)((JScrollPane)MainWindow.tabBar.getSelectedComponent()).getViewport().getView())).ellipse();
             lastClicked.setBackground(new Color(220, 220, 220));
             lastClicked = ellipse;
             ellipse.setBackground(new Color(118, 246, 74));
@@ -104,7 +104,7 @@ public class ToolBar extends JPanel {
         rectangle.setIcon(initButtonIcon("/icons/rectangle.png"));
         rectangle.setBackground(new Color(220, 220, 220));
         rectangle.addActionListener(actionEvent -> {
-            ((DrawArea)MainWindow.tabBar.getSelectedComponent()).rectangle();
+            (((DrawArea)((JScrollPane)MainWindow.tabBar.getSelectedComponent()).getViewport().getView())).rectangle();
             lastClicked.setBackground(new Color(220, 220, 220));
             lastClicked = rectangle;
             rectangle.setBackground(new Color(118, 246, 74));
@@ -115,7 +115,7 @@ public class ToolBar extends JPanel {
         text.setIcon(initButtonIcon("/icons/text.png"));
         text.setBackground(new Color(220, 220, 220));
         text.addActionListener(actionEvent -> {
-            ((DrawArea)MainWindow.tabBar.getSelectedComponent()).text();
+            (((DrawArea)((JScrollPane)MainWindow.tabBar.getSelectedComponent()).getViewport().getView())).text();
             lastClicked.setBackground(new Color(220, 220, 220));
             lastClicked = text;
             text.setBackground(new Color(118, 246, 74));
@@ -126,7 +126,7 @@ public class ToolBar extends JPanel {
         erase.setIcon(initButtonIcon("/icons/erase.png"));
         erase.setBackground(new Color(220, 220, 220));
         erase.addActionListener(actionEvent -> {
-            ((DrawArea)MainWindow.tabBar.getSelectedComponent()).erase();
+            (((DrawArea)((JScrollPane)MainWindow.tabBar.getSelectedComponent()).getViewport().getView())).erase();
             lastClicked.setBackground(new Color(220, 220, 220));
             lastClicked = erase;
             erase.setBackground(new Color(118, 246, 74));
@@ -137,7 +137,7 @@ public class ToolBar extends JPanel {
         selection.setIcon(initButtonIcon("/icons/selection.png"));
         selection.setBackground(new Color(220, 220, 220));
         selection.addActionListener(actionEvent -> {
-            ((DrawArea)MainWindow.tabBar.getSelectedComponent()).selection();
+            (((DrawArea)((JScrollPane)MainWindow.tabBar.getSelectedComponent()).getViewport().getView())).selection();
             lastClicked.setBackground(new Color(220, 220, 220));
             lastClicked = selection;
             selection.setBackground(new Color(118, 246, 74));
@@ -148,7 +148,7 @@ public class ToolBar extends JPanel {
         lasso.setIcon(initButtonIcon("/icons/lasso.png"));
         lasso.setBackground(new Color(220, 220, 220));
         lasso.addActionListener(actionEvent -> {
-            ((DrawArea)MainWindow.tabBar.getSelectedComponent()).lasso();
+            (((DrawArea)((JScrollPane)MainWindow.tabBar.getSelectedComponent()).getViewport().getView())).lasso();
             lastClicked.setBackground(new Color(220, 220, 220));
             lastClicked = lasso;
             lasso.setBackground(new Color(118, 246, 74));
@@ -159,7 +159,7 @@ public class ToolBar extends JPanel {
         zoom.setIcon(initButtonIcon("/icons/zoom.png"));
         zoom.setBackground(new Color(220, 220, 220));
         zoom.addActionListener(actionEvent -> {
-            ((DrawArea)MainWindow.tabBar.getSelectedComponent()).zoom();
+            (((DrawArea)((JScrollPane)MainWindow.tabBar.getSelectedComponent()).getViewport().getView())).zoom();
             lastClicked.setBackground(new Color(220, 220, 220));
             lastClicked = zoom;
             zoom.setBackground(new Color(118, 246, 74));

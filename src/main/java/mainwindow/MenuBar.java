@@ -34,7 +34,7 @@ public class MenuBar extends JMenuBar {
         JMenuItem newTab = new JMenuItem("<html><font color='#d6d6d6'>New</font></html>");
         newTab.setBackground(Color.DARK_GRAY);
         newTab.addActionListener(actionEvent -> {
-            MainWindow.tabBar.add("untiled" + MainWindow.tabsCount++, new DrawArea());
+            MainWindow.tabBar.add("tab" + MainWindow.tabsCount++,new JScrollPane(new DrawArea(2000, 2000)));
         });
         return newTab;
     }
@@ -49,7 +49,7 @@ public class MenuBar extends JMenuBar {
             int result = fileChooser.showOpenDialog(this);
             if (result == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = fileChooser.getSelectedFile();
-                ((DrawArea) MainWindow.tabBar.getSelectedComponent()).savePicture(selectedFile);
+                (((DrawArea)((JScrollPane)MainWindow.tabBar.getSelectedComponent()).getViewport().getView())).savePicture(selectedFile);
             }
         });
         return save;
@@ -64,7 +64,8 @@ public class MenuBar extends JMenuBar {
             int result = fileChooser.showOpenDialog(this);
             if (result == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = fileChooser.getSelectedFile();
-                ((DrawArea) MainWindow.tabBar.getSelectedComponent()).loadPicture(selectedFile);
+                (((DrawArea)((JScrollPane)MainWindow.tabBar.getSelectedComponent()).getViewport().getView())).loadPicture(selectedFile);
+
             }
         });
         return load;
@@ -112,7 +113,7 @@ public class MenuBar extends JMenuBar {
         JMenuItem pencil = new JMenuItem("<html><font color='#d6d6d6'>Pencil</font></html>");
         pencil.setBackground(Color.DARK_GRAY);
         pencil.addActionListener(actionEvent -> {
-            ((DrawArea) MainWindow.tabBar.getSelectedComponent()).pencil();
+            (((DrawArea)((JScrollPane)MainWindow.tabBar.getSelectedComponent()).getViewport().getView())).pencil();
         });
         return pencil;
     }
@@ -122,7 +123,7 @@ public class MenuBar extends JMenuBar {
         JMenuItem line = new JMenuItem("<html><font color='#d6d6d6'>Line</font></html>");
         line.setBackground(Color.DARK_GRAY);
         line.addActionListener(actionEvent -> {
-            ((DrawArea) MainWindow.tabBar.getSelectedComponent()).line();
+            (((DrawArea)((JScrollPane)MainWindow.tabBar.getSelectedComponent()).getViewport().getView())).line();
         });
         return line;
     }
@@ -131,7 +132,8 @@ public class MenuBar extends JMenuBar {
         JMenuItem rectangle = new JMenuItem("<html><font color='#d6d6d6'>Rectangle</font></html>");
         rectangle.setBackground(Color.darkGray);
         rectangle.addActionListener(actionEvent -> {
-            ((DrawArea) MainWindow.tabBar.getSelectedComponent()).rectangle();
+            (((DrawArea)((JScrollPane)MainWindow.tabBar.getSelectedComponent()).getViewport().getView())).rectangle();
+
         });
         return rectangle;
     }
@@ -140,7 +142,7 @@ public class MenuBar extends JMenuBar {
         JMenuItem ellipse = new JMenuItem("<html><font color='#d6d6d6'>Ellipse</font></html>");
         ellipse.setBackground(Color.darkGray);
         ellipse.addActionListener(actionEvent -> {
-            ((DrawArea) MainWindow.tabBar.getSelectedComponent()).ellipse();
+            (((DrawArea)((JScrollPane)MainWindow.tabBar.getSelectedComponent()).getViewport().getView())).ellipse();
         });
         return ellipse;
     }
@@ -149,7 +151,7 @@ public class MenuBar extends JMenuBar {
         JMenuItem text = new JMenuItem("<html><font color='#d6d6d6'>Text</font></html>");
         text.setBackground(Color.darkGray);
         text.addActionListener(actionEvent -> {
-            ((DrawArea) MainWindow.tabBar.getSelectedComponent()).text();
+            (((DrawArea)((JScrollPane)MainWindow.tabBar.getSelectedComponent()).getViewport().getView())).text();
         });
         return text;
     }
@@ -158,7 +160,7 @@ public class MenuBar extends JMenuBar {
         JMenuItem selectionRectangle = new JMenuItem("<html><font color='#d6d6d6'>Select</font></html>");
         selectionRectangle.setBackground(Color.darkGray);
         selectionRectangle.addActionListener(actionEvent -> {
-            ((DrawArea) MainWindow.tabBar.getSelectedComponent()).selection();
+            (((DrawArea)((JScrollPane)MainWindow.tabBar.getSelectedComponent()).getViewport().getView())).selection();
         });
         return selectionRectangle;
     }
@@ -167,7 +169,7 @@ public class MenuBar extends JMenuBar {
         JMenuItem lasso = new JMenuItem("<html><font color='#d6d6d6'>Lasso</font></html>");
         lasso.setBackground(Color.darkGray);
         lasso.addActionListener(actionEvent -> {
-            ((DrawArea) MainWindow.tabBar.getSelectedComponent()).lasso();
+            (((DrawArea)((JScrollPane)MainWindow.tabBar.getSelectedComponent()).getViewport().getView())).lasso();
         });
         return lasso;
     }
@@ -176,7 +178,7 @@ public class MenuBar extends JMenuBar {
         JMenuItem zoom = new JMenuItem("<html><font color='#d6d6d6'>Zoom</font></html>");
         zoom.setBackground(Color.darkGray);
         zoom.addActionListener(actionEvent -> {
-            ((DrawArea) MainWindow.tabBar.getSelectedComponent()).zoom();
+            (((DrawArea)((JScrollPane)MainWindow.tabBar.getSelectedComponent()).getViewport().getView())).zoom();
         });
         return zoom;
     }
@@ -188,13 +190,12 @@ public class MenuBar extends JMenuBar {
     }
 
     private JMenuItem initAboutItem() {
-        JMenuItem zoom = new JMenuItem("<html><font color='#d6d6d6'>about</font></html>");
-        zoom.setBackground(Color.darkGray);
-        zoom.addActionListener(actionEvent -> {
+        JMenuItem about = new JMenuItem("<html><font color='#d6d6d6'>About</font></html>");
+        about.setBackground(Color.darkGray);
+        about.addActionListener(actionEvent -> {
             new AboutWindow(this.getX(), this.getY());
-            ((DrawArea) MainWindow.tabBar.getSelectedComponent()).zoom();
         });
-        return zoom;
+        return about;
     }
 
 }

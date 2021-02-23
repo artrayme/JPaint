@@ -58,7 +58,8 @@ public class ConfigurationBar extends JPanel {
         colors.setAlignmentX(1);
         colors.addActionListener(actionEvent -> {
             Color newColor = JColorChooser.showDialog(null, "Choose a color", Color.BLACK);
-            ((DrawArea) MainWindow.tabBar.getSelectedComponent()).setCurrentColor(newColor);
+            (((DrawArea)((JScrollPane)MainWindow.tabBar.getSelectedComponent()).getViewport().getView())).setCurrentColor(newColor);
+
         });
     }
 
@@ -103,7 +104,8 @@ public class ConfigurationBar extends JPanel {
                 thicknessField.setBackground(Color.red);
             }
             if (result > 0 && result < 200)
-                ((DrawArea) MainWindow.tabBar.getSelectedComponent()).setThickness(result);
+            (((DrawArea)((JScrollPane)MainWindow.tabBar.getSelectedComponent()).getViewport().getView())).setThickness(result);
+
             else
                 thicknessField.setBackground(Color.red);
         }
@@ -134,7 +136,8 @@ public class ConfigurationBar extends JPanel {
                 zoomField.setBackground(Color.red);
             }
             if (result > 0 && result < 10)
-                ((DrawArea) MainWindow.tabBar.getSelectedComponent()).setZoom(result);
+//                ((DrawArea) MainWindow.tabBar.getSelectedComponent()).setZoom(result);
+            (((DrawArea)((JScrollPane)MainWindow.tabBar.getSelectedComponent()).getViewport().getView())).setZoom(result);
             else
                 zoomField.setBackground(Color.red);
 
