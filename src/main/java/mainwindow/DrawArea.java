@@ -10,82 +10,100 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
 import java.awt.font.FontRenderContext;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 
 public class DrawArea extends JPanel {
-    //This map is using for adding shortcuts (only copy-paste now)
+    /**
+     * This map is using for adding shortcuts (only copy-paste now)
+     * */
     private final HashMap<KeyStroke, Action> actionMap = new HashMap<>();
 
-    //This MouseInputAdapter set behavior for each figure when draw
+    /**
+     * This MouseInputAdapter set behavior for each figure when draw
+     */
     private MouseInputAdapter currentEvent = new PencilMouseEvent();
 
-    //Current list of shapes. All shapes from this list are repaints each cycle
-    private final List<Shape> shapes = new LinkedList<>();
+    /**
+     * Current list of shapes. All shapes from this list are repaints each cycle
+     * Shapes from this list are real (all shapes, except selection area and lasso)
+     */
+    private final LinkedList<Shape> shapes = new LinkedList<>();
 
-    //This shape is consist of temporary objects, such as selection frame.
-    // Shapes in this list are display, but not saved to image
-    private final List<Shape> tempShapes = new LinkedList<>();
+    /**
+     * This list is consist of temporary shapes.
+     * Shapes in this list are display, but not saved to image (like selection area and lasso)
+     */
+    private final LinkedList<Shape> tempShapes = new LinkedList<>();
 
-    //Current active shape. It's redraws too, and using for the figure animation
+    /**
+     * Current active shape. It's also drawn every cycle, and using for the figure drawing animation
+     */
     private Shape currentShape = new Pencil();
 
+    /**
+     * The Current color of the figures
+    */
     private Color currentColor = Color.BLACK;
+
+    /**
+     * The current thickness of the figures
+     */
     private int thickness = 1;
+
+    /**
+     * The current zoom level of the zoom tool
+     */
     private int zoom = 1;
 
-    //Dimensions for a selection rectangle
+    /**
+     * The dimensions of the selection rectangle
+     */
     private int selectedAreaStartX, selectedAreaStartY, selectedAreaEndX, selectedAreaEndY;
 
-    //Image of current drawing area state
-    private Image image;
+    /**
+     * An image that duplicates the current state of the field.
+     * Is using for an optimization: if user will draw a lot of shapes,
+     * the program can become slow (because every cycle all the figures from shapes list
+     * will be drawn). To solve this problem, sometimes all the field figures are saved as an image,
+     * and the result image becomes a figure.
+     */
+    private Image fieldImage;
 
-    //This image is using for copy-paste and zoom functions
+    /**
+     * This image is using for copy-paste and zoom functions
+     */
     private Image croppedImage;
 
-    //This is a duplicate of the drawing area
-    private Graphics2D graphics;
+    /**
+     * This is using for generating the fieldImage
+     */
+    private Graphics2D fieldGraphicsDuplicate;
 
-    //This field is appear, when text function is activated
+    /**
+     * This field is appear, when a text function is activated
+     */
     private final JTextField textField = new JTextField();
 
-    AffineTransform fieldScale = new AffineTransform();
-
-    public DrawArea(int x, int y) {
-        setPreferredSize(new Dimension(x, y));
+    public DrawArea() {
         setupShortcuts();
         pencil();
-        this.addMouseWheelListener(new MouseAdapter() {
-            @Override
-            public void mouseWheelMoved(MouseWheelEvent e) {
-                double scale = 1;
-                if (e.getPreciseWheelRotation() < 0) {
-                    scale -= 0.1;
-                } else {
-                    scale += 0.1;
-                }
-                if (scale < 0.01) {
-                    scale = 0.01;
-                }
-                double anchorX = (getWidth() - getWidth() * scale) / 2;
-                double anchorY = (getHeight() - getHeight() * scale) / 2;
-                fieldScale.translate(anchorX, anchorY);
-                fieldScale.scale(scale, scale);
-                repaint();
-            }
-        });
     }
 
+    /**
+     * In this method shortcuts are initialized
+     */
     private void setupShortcuts() {
+
         KeyStroke copyKey = KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_DOWN_MASK);
         KeyStroke pasteKey = KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.CTRL_DOWN_MASK);
         actionMap.put(copyKey, new CopyKeyEvent());
@@ -93,6 +111,7 @@ public class DrawArea extends JPanel {
 
         addShortcutsEngine();
     }
+
 
     private void addShortcutsEngine() {
         KeyboardFocusManager kfm = KeyboardFocusManager.getCurrentKeyboardFocusManager();
@@ -123,29 +142,25 @@ public class DrawArea extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        ((Graphics2D) g).setTransform(fieldScale);
-
         g.setColor(Color.white);
         g.fillRect(0, 0, getWidth(), getHeight());
         getScreenImage();
         for (Shape shape : shapes) {
-            shape.draw(graphics);
+            shape.draw(fieldGraphicsDuplicate);
             shape.draw(g);
         }
         for (Shape tempShape : tempShapes) {
             tempShape.draw(g);
         }
         currentShape.draw(g);
-        ((Graphics2D) g).setTransform(fieldScale);
-
     }
 
     private void getScreenImage() {
-        if (image == null) {
-            image = createImage(getSize().width, getSize().height);
-            graphics = (Graphics2D) image.getGraphics();
-            graphics.setColor(Color.white);
-            graphics.fillRect(0, 0, getWidth(), getHeight());
+        if (fieldImage == null) {
+            fieldImage = createImage(getSize().width, getSize().height);
+            fieldGraphicsDuplicate = (Graphics2D) fieldImage.getGraphics();
+            fieldGraphicsDuplicate.setColor(Color.white);
+            fieldGraphicsDuplicate.fillRect(0, 0, getWidth(), getHeight());
             repaint();
         }
     }
@@ -238,7 +253,7 @@ public class DrawArea extends JPanel {
         addMouseListener(currentEvent);
         addMouseMotionListener(currentEvent);
         setCursor(new Cursor(Cursor.MOVE_CURSOR));
-        croppedImage = copyImage(((BufferedImage) image).getSubimage(0, 0, 100 / zoom, 100 / zoom));
+        croppedImage = copyImage(((BufferedImage) fieldImage).getSubimage(0, 0, 100 / zoom, 100 / zoom));
         croppedImage = croppedImage.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
         currentShape = new Picture(croppedImage);
     }
@@ -254,7 +269,7 @@ public class DrawArea extends JPanel {
 
     public void savePicture(File file) {
         try {
-            ImageIO.write((RenderedImage) image, "PNG", file);
+            ImageIO.write((RenderedImage) fieldImage, "PNG", file);
         } catch (IOException ignored) {
         }
     }
@@ -278,7 +293,7 @@ public class DrawArea extends JPanel {
     private void cacheField() {
         repaint();
         shapes.clear();
-        Image newBackground = copyImage(image);
+        Image newBackground = copyImage(fieldImage);
         shapes.add(new Picture(0, 0, newBackground));
         repaint();
     }
@@ -305,6 +320,11 @@ public class DrawArea extends JPanel {
             repaint();
             X2 = x1;
             Y2 = y1;
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            cacheField();
         }
 
     }
@@ -425,7 +445,6 @@ public class DrawArea extends JPanel {
 
         @Override
         public void mousePressed(MouseEvent e) {
-            cacheField();
             X2 = e.getX();
             Y2 = e.getY();
         }
@@ -439,6 +458,11 @@ public class DrawArea extends JPanel {
             repaint();
             X2 = x1;
             Y2 = y1;
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            cacheField();
         }
 
     }
@@ -547,8 +571,8 @@ public class DrawArea extends JPanel {
 
         @Override
         public void mouseMoved(MouseEvent e) {
-            if (e.getX() + 100 <= ((BufferedImage) image).getWidth() && e.getY() + 100 <= ((BufferedImage) image).getHeight()) {
-                croppedImage = copyImage(((BufferedImage) image).getSubimage(e.getX(), e.getY(), 100 / zoom, 100 / zoom));
+            if (e.getX() + 100 <= ((BufferedImage) fieldImage).getWidth() && e.getY() + 100 <= ((BufferedImage) fieldImage).getHeight()) {
+                croppedImage = copyImage(((BufferedImage) fieldImage).getSubimage(e.getX(), e.getY(), 100 / zoom, 100 / zoom));
                 croppedImage = croppedImage.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
                 currentShape = new Picture(croppedImage);
                 currentShape.setStartX(e.getX());
@@ -571,7 +595,7 @@ public class DrawArea extends JPanel {
                 int startY = Math.min(selectedAreaStartY, selectedAreaEndY);
                 int width = Math.abs(selectedAreaEndX - selectedAreaStartX);
                 int height = Math.abs(selectedAreaEndY - selectedAreaStartY);
-                croppedImage = copyImage(((BufferedImage) image).getSubimage(startX, startY, width, height));
+                croppedImage = copyImage(((BufferedImage) fieldImage).getSubimage(startX, startY, width, height));
                 croppedImage = croppedImage.getScaledInstance(width, height, Image.SCALE_FAST);
             }
         }
@@ -607,7 +631,7 @@ public class DrawArea extends JPanel {
 
         private void changeText() {
             currentShape.setText(textField.getText());
-            FontRenderContext frc = graphics.getFontRenderContext();
+            FontRenderContext frc = fieldGraphicsDuplicate.getFontRenderContext();
             int width = (int) textField.getFont().getStringBounds(textField.getText(), frc).getWidth();
             if (width > textField.getWidth()) {
                 textField.setBackground(Color.red);
@@ -626,7 +650,7 @@ public class DrawArea extends JPanel {
         @Override
         public void keyPressed(KeyEvent keyEvent) {
             if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
-                FontRenderContext frc = graphics.getFontRenderContext();
+                FontRenderContext frc = fieldGraphicsDuplicate.getFontRenderContext();
                 int width = (int) textField.getFont().getStringBounds(textField.getText(), frc).getWidth();
                 if (width < textField.getWidth()) {
                     shapes.add(currentShape);

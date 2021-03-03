@@ -1,25 +1,20 @@
-mainwindow/shapes/Shape.java
- mainwindow.shapes.Shape
+mainwindow/MenuBar.java
+ mainwindow.MenuBar
 mainwindow/shapes/Text.java
  mainwindow.shapes.Text
 mainwindow/shapes/Rectangle.java
  mainwindow.shapes.Rectangle
-mainwindow/shapes/SelectionRectangle.java
- mainwindow.shapes.SelectionRectangle
-mainwindow/shapes/Line.java
- mainwindow.shapes.Line
+mainwindow/ToolBar.java
+ mainwindow.ToolBar
+mainwindow/ConfigurationBar.java
+ mainwindow.ConfigurationBar
+ mainwindow.ConfigurationBar$1
+ mainwindow.ConfigurationBar$ThicknessFieldListener
+ mainwindow.ConfigurationBar$ZoomFieldListener
 mainwindow/shapes/Picture.java
  mainwindow.shapes.Picture
 mainwindow/shapes/Background.java
  mainwindow.shapes.Background
-mainwindow/shapes/Ellipse.java
- mainwindow.shapes.Ellipse
-mainwindow/AboutWindow.java
- mainwindow.AboutWindow
-mainwindow/shapes/Pencil.java
- mainwindow.shapes.Pencil
-Main.java
- Main
 mainwindow/DrawArea.java
  mainwindow.DrawArea
  mainwindow.DrawArea$1
@@ -37,14 +32,19 @@ mainwindow/DrawArea.java
  mainwindow.DrawArea$TextFieldKeyListener
  mainwindow.DrawArea$TextMouseEvent
  mainwindow.DrawArea$ZoomMouseEvent
-mainwindow/ConfigurationBar.java
- mainwindow.ConfigurationBar
- mainwindow.ConfigurationBar$1
- mainwindow.ConfigurationBar$ThicknessFieldListener
- mainwindow.ConfigurationBar$ZoomFieldListener
-mainwindow/ToolBar.java
- mainwindow.ToolBar
+mainwindow/AboutWindow.java
+ mainwindow.AboutWindow
+mainwindow/shapes/Pencil.java
+ mainwindow.shapes.Pencil
+Main.java
+ Main
 mainwindow/MainWindow.java
  mainwindow.MainWindow
-mainwindow/MenuBar.java
- mainwindow.MenuBar
+mainwindow/shapes/Line.java
+ mainwindow.shapes.Line
+mainwindow/shapes/Shape.java
+ mainwindow.shapes.Shape
+mainwindow/shapes/SelectionRectangle.java
+ mainwindow.shapes.SelectionRectangle
+mainwindow/shapes/Ellipse.java
+ mainwindow.shapes.Ellipse
