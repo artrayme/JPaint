@@ -34,7 +34,7 @@ public class MenuBar extends JMenuBar {
         JMenuItem newTab = new JMenuItem("<html><font color='#d6d6d6'>New</font></html>");
         newTab.setBackground(Color.DARK_GRAY);
         newTab.addActionListener(actionEvent -> {
-            MainWindow.tabBar.add("tab" + MainWindow.tabsCount++,new JScrollPane(new DrawArea(2000, 2000)));
+            MainWindow.tabBar.add("tab" + MainWindow.tabsCount++,(new DrawArea()));
         });
         return newTab;
     }
