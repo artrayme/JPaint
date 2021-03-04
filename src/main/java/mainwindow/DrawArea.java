@@ -25,7 +25,7 @@ import java.util.LinkedList;
 public class DrawArea extends JPanel {
     /**
      * This map is using for adding shortcuts (only copy-paste now)
-     * */
+     */
     private final HashMap<KeyStroke, Action> actionMap = new HashMap<>();
 
     /**
@@ -52,7 +52,7 @@ public class DrawArea extends JPanel {
 
     /**
      * The Current color of the figures
-    */
+     */
     private Color currentColor = Color.BLACK;
 
     /**
@@ -112,7 +112,9 @@ public class DrawArea extends JPanel {
         addShortcutsEngine();
     }
 
-
+    /**
+     * Init a keyboard event listener
+     */
     private void addShortcutsEngine() {
         KeyboardFocusManager kfm = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         kfm.addKeyEventDispatcher(e -> {
@@ -127,34 +129,67 @@ public class DrawArea extends JPanel {
         });
     }
 
+    /**
+     * Setter for the current shapes thickness
+     *
+     * @param thickness
+     */
     public void setThickness(int thickness) {
         this.thickness = thickness;
     }
 
+    /**
+     * Setter for the current shapes thickness
+     *
+     * @param currentColor
+     */
     public void setCurrentColor(Color currentColor) {
         this.currentColor = currentColor;
     }
 
+    /**
+     * Setter for the current zoom tool
+     *
+     * @param zoom
+     */
     public void setZoom(int zoom) {
         this.zoom = zoom;
     }
 
+    /**
+     * The Main drawing cycle.
+     *
+     * @param g
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        //filling background
         g.setColor(Color.white);
         g.fillRect(0, 0, getWidth(), getHeight());
+
+        //generating filedImage
         getScreenImage();
+
+        //Drawing real shapes
         for (Shape shape : shapes) {
             shape.draw(fieldGraphicsDuplicate);
             shape.draw(g);
         }
+
+        //Drawing temporary shapes
         for (Shape tempShape : tempShapes) {
             tempShape.draw(g);
         }
+
+        //Drawing currentShape;
         currentShape.draw(g);
     }
 
+    /**
+     * Generating the fieldImage
+     */
     private void getScreenImage() {
         if (fieldImage == null) {
             fieldImage = createImage(getSize().width, getSize().height);
@@ -165,6 +200,9 @@ public class DrawArea extends JPanel {
         }
     }
 
+    /**
+     * Init the pencil tool
+     */
     public void pencil() {
         clearLastFigure();
         currentEvent = new PencilMouseEvent();
@@ -173,6 +211,9 @@ public class DrawArea extends JPanel {
         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }
 
+    /**
+     * Init the line tool
+     */
     public void line() {
         clearLastFigure();
         currentEvent = new LineMouseEvent();
@@ -182,6 +223,9 @@ public class DrawArea extends JPanel {
 
     }
 
+    /**
+     * Init the rectangle tool
+     */
     public void rectangle() {
         clearLastFigure();
         currentEvent = new RectangleMouseEvent();
@@ -191,6 +235,9 @@ public class DrawArea extends JPanel {
 
     }
 
+    /**
+     * Init the ellipse tool
+     */
     public void ellipse() {
         clearLastFigure();
         currentEvent = new EllipseMouseEvent();
@@ -200,6 +247,9 @@ public class DrawArea extends JPanel {
 
     }
 
+    /**
+     * Init the text tool
+     */
     public void text() {
         clearLastFigure();
         currentEvent = new TextMouseEvent();
@@ -209,6 +259,9 @@ public class DrawArea extends JPanel {
 
     }
 
+    /**
+     * Init the pencil tool
+     */
     public void erase() {
         clearLastFigure();
         removeMouseMotionListener(currentEvent);
@@ -219,6 +272,9 @@ public class DrawArea extends JPanel {
 
     }
 
+    /**
+     * Init the selection tool
+     */
     public void selection() {
         clearLastFigure();
         currentEvent = new SelectionMouseEvent();
@@ -228,6 +284,9 @@ public class DrawArea extends JPanel {
 
     }
 
+    /**
+     * Init the lasso tool
+     */
     public void lasso() {
         clearLastFigure();
         currentEvent = new LassoMouseEvent();
@@ -237,6 +296,9 @@ public class DrawArea extends JPanel {
 
     }
 
+    /**
+     * Init the picture tool
+     */
     public void picture() {
         clearLastFigure();
         currentEvent = new PictureMouseEvent();
@@ -247,6 +309,9 @@ public class DrawArea extends JPanel {
 
     }
 
+    /**
+     * Init the zoom tool
+     */
     public void zoom() {
         clearLastFigure();
         currentEvent = new ZoomMouseEvent();
@@ -258,6 +323,11 @@ public class DrawArea extends JPanel {
         currentShape = new Picture(croppedImage);
     }
 
+    /**
+     * Loading picture from file
+     *
+     * @param file file from which the reading will be performed
+     */
     public void loadPicture(File file) {
         try {
             croppedImage = ImageIO.read(file);
@@ -267,6 +337,11 @@ public class DrawArea extends JPanel {
         picture();
     }
 
+    /**
+     * Saving picture to the file
+     *
+     * @param file
+     */
     public void savePicture(File file) {
         try {
             ImageIO.write((RenderedImage) fieldImage, "PNG", file);
@@ -274,6 +349,10 @@ public class DrawArea extends JPanel {
         }
     }
 
+    /**
+     * Clear last figure and connected with figure components
+     * Such as mouse listener, tempShapes and etc.
+     */
     private void clearLastFigure() {
         tempShapes.clear();
         remove(textField);
@@ -282,6 +361,12 @@ public class DrawArea extends JPanel {
         repaint();
     }
 
+    /**
+     * Copying any image
+     *
+     * @param img input image
+     * @return copy of the input image
+     */
     private BufferedImage copyImage(Image img) {
         BufferedImage copyOfImage = new BufferedImage(getSize().width,
                 getSize().height, BufferedImage.TYPE_INT_RGB);
@@ -290,6 +375,9 @@ public class DrawArea extends JPanel {
         return copyOfImage;
     }
 
+    /**
+     * Optimizations. This method is using for clearing shapes list
+     */
     private void cacheField() {
         repaint();
         shapes.clear();
@@ -298,6 +386,9 @@ public class DrawArea extends JPanel {
         repaint();
     }
 
+    /**
+     * An event listener for the pencil tool
+     */
     private class PencilMouseEvent extends MouseInputAdapter {
         private int X2;
         private int Y2;
@@ -329,6 +420,9 @@ public class DrawArea extends JPanel {
 
     }
 
+    /**
+     * An event listener for the line tool
+     */
     private class LineMouseEvent extends MouseInputAdapter {
 
         @Override
@@ -352,6 +446,9 @@ public class DrawArea extends JPanel {
 
     }
 
+    /**
+     * An event listener for the rectangle tool
+     */
     private class RectangleMouseEvent extends MouseInputAdapter {
 
         @Override
@@ -375,6 +472,9 @@ public class DrawArea extends JPanel {
 
     }
 
+    /**
+     * An event listener for the ellipse tool
+     */
     private class EllipseMouseEvent extends MouseInputAdapter {
 
         @Override
@@ -399,6 +499,9 @@ public class DrawArea extends JPanel {
 
     }
 
+    /**
+     * An event listener for the text tool
+     */
     private class TextMouseEvent extends MouseInputAdapter {
 
         @Override
@@ -439,6 +542,9 @@ public class DrawArea extends JPanel {
 
     }
 
+    /**
+     * An event listener for the erase tool
+     */
     private class EraseMouseEvent extends MouseInputAdapter {
         private int X2;
         private int Y2;
@@ -467,6 +573,9 @@ public class DrawArea extends JPanel {
 
     }
 
+    /**
+     * An event listener for the selection tool
+     */
     private class SelectionMouseEvent extends MouseInputAdapter {
         @Override
         public void mousePressed(MouseEvent e) {
@@ -491,6 +600,9 @@ public class DrawArea extends JPanel {
         }
     }
 
+    /**
+     * An event listener for the lasso tool
+     */
     private class LassoMouseEvent extends MouseInputAdapter {
         private int X2, Y2;
         private int minX = getWidth(), minY = getHeight(), maxX = 0, maxY = 0;
@@ -540,6 +652,9 @@ public class DrawArea extends JPanel {
         }
     }
 
+    /**
+     * An event listener for the picture tool
+     */
     private class PictureMouseEvent extends MouseInputAdapter {
 
         @Override
@@ -567,6 +682,9 @@ public class DrawArea extends JPanel {
 
     }
 
+    /**
+     * An event listener for the zoom tool
+     */
     private class ZoomMouseEvent extends MouseInputAdapter {
 
         @Override
@@ -583,6 +701,9 @@ public class DrawArea extends JPanel {
 
     }
 
+    /**
+     * An event listener for the Copy shortcut
+     */
     private class CopyKeyEvent extends AbstractAction {
         public CopyKeyEvent() {
             super("copy");
@@ -601,6 +722,9 @@ public class DrawArea extends JPanel {
         }
     }
 
+    /**
+     * An event listener for the Paste shortcut
+     */
     private class PasteKeyEvent extends AbstractAction {
         public PasteKeyEvent() {
             super("paste");
@@ -613,6 +737,9 @@ public class DrawArea extends JPanel {
         }
     }
 
+    /**
+     * An event listener for the text field (text tool)
+     */
     private class TextFieldDocumentListener implements DocumentListener {
         @Override
         public void insertUpdate(DocumentEvent documentEvent) {
@@ -641,6 +768,9 @@ public class DrawArea extends JPanel {
         }
     }
 
+    /**
+     * An event listener for the text field (text tool)
+     */
     private class TextFieldKeyListener implements KeyListener {
 
         @Override
