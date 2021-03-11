@@ -16,7 +16,7 @@ Just experimenting with the swing library
 - Thickness
 - Zoom level
 
-##Screenshots
+## Screenshots
 ![N|Solid](screenshots/img.png)
 ![N|Solid](screenshots/img_1.png)
 
