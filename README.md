@@ -2,7 +2,7 @@
 ## _(not)Real paint for real geeks_
 Just experimenting with the swing library
 
-##Tools
+## Tools
 - Pencil
 - Line 
 - Rectangle 
@@ -11,7 +11,7 @@ Just experimenting with the swing library
 - Rubber 
 - Zoom
 
-##Tool options
+## Tool options
 - Color
 - Thickness
 - Zoom level
@@ -20,7 +20,7 @@ Just experimenting with the swing library
 ![N|Solid](screenshots/img.png)
 ![N|Solid](screenshots/img_1.png)
 
-##ToDo
+## ToDo
 - Scroll pane 
 - Tests
 - Detailed documentation 
