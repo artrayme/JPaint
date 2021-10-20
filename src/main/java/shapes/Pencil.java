@@ -1,14 +1,14 @@
-package mainwindow.shapes;
+package shapes;
 
 import java.awt.*;
 
-public class Ellipse extends Shape {
+public class Pencil extends Shape{
 
-    public Ellipse(){
+    public Pencil(){
 
     }
 
-    public Ellipse(int startX, int startY, int endX, int endY, Color color, int thickness){
+    public Pencil(int startX, int startY, int endX, int endY, Color color, int thickness){
         this.startX = startX;
         this.startY = startY;
         this.endX = endX;
@@ -19,8 +19,8 @@ public class Ellipse extends Shape {
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(this.color);
+        g.setColor(color);
         ((Graphics2D) g).setStroke(new BasicStroke(thickness));
-        g.drawOval(Math.min(startX, endX), Math.min(startY, endY), Math.abs(endX-startX), Math.abs(endY-startY));
+        g.drawLine(startX, startY, endX, endY);
     }
 }

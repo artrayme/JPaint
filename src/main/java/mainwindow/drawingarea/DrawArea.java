@@ -1,8 +1,8 @@
-package mainwindow;
+package mainwindow.drawingarea;
 
-import mainwindow.shapes.Rectangle;
-import mainwindow.shapes.Shape;
-import mainwindow.shapes.*;
+import shapes.Rectangle;
+import shapes.Shape;
+import shapes.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -220,7 +220,6 @@ public class DrawArea extends JPanel {
         addMouseListener(currentEvent);
         addMouseMotionListener(currentEvent);
         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-
     }
 
     /**

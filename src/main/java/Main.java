@@ -16,8 +16,10 @@ public class Main {
         int width = (int) (screenSize.getWidth() * 0.8);
         int height = (int) (screenSize.getHeight() * 0.8);
 
+//      force anti-aliasing if it is disabled in the jvm configuration
         System.setProperty("awt.useSystemAAFontSettings", "on");
         System.setProperty("swing.aatext", "true");
+
         setUIFont(new FontUIResource("Liberation Serif", Font.BOLD, 14));
 
         MainWindow mainWindow = new MainWindow();
@@ -28,7 +30,7 @@ public class Main {
     }
 
     public static void setUIFont(FontUIResource f) {
-        Enumeration keys = UIManager.getDefaults().keys();
+        Enumeration<Object> keys = UIManager.getDefaults().keys();
         while (keys.hasMoreElements()) {
             Object key = keys.nextElement();
             Object value = UIManager.get(key);

@@ -1,5 +1,7 @@
 package mainwindow;
 
+import mainwindow.drawingarea.DrawArea;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;

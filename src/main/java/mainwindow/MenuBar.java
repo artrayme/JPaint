@@ -1,5 +1,7 @@
 package mainwindow;
 
+import mainwindow.drawingarea.DrawArea;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;

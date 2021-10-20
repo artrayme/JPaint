@@ -1,11 +1,11 @@
-package mainwindow.shapes;
+package shapes;
 
 import java.awt.*;
 
-public class Text extends Shape {
+public class Background extends Shape{
     @Override
     public void draw(Graphics g) {
         g.setColor(color);
-        g.drawString(text, startX, startY);
+        g.fillRect(0,0, endX, endY);
     }
 }
