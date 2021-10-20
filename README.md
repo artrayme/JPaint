@@ -30,3 +30,6 @@ Just experimenting with the swing library
 - Tabs naming 
 - Dragging fragments
 - Undo/redo
+
+## Issues
+- Sometimes the workspace crawls to the left while drawing
